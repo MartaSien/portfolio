@@ -14,7 +14,7 @@ class SiteGenerator(object):
         self.projects = []
         self.env = Environment(loader=FileSystemLoader("template"))
         self.get_projects()
-        self.empty_public()
+        self.empty_docs()
         self.copy_static()
         self.render_project_details_md()
         self.render_mainpage()
@@ -30,18 +30,18 @@ class SiteGenerator(object):
                 self.projects.append(data)
         self.projects = sorted(self.projects, key=itemgetter("Priority"))
     
-    def empty_public(self):
-        """Ensure the public directory is empty before generating"""
+    def empty_docs(self):
+        """Ensure the docs directory is empty before generating"""
         try:
-            shutil.rmtree("./public")
-            os.mkdir("./public")
+            shutil.rmtree("./docs")
+            os.mkdir("./docs")
         except:
             print("Error cleaning up old files.")
     
     def copy_static(self):
-        """Copy static assets to the public directory"""
+        """Copy static assets to the docs directory"""
         try:
-            shutil.copytree("template/static", "public/static")
+            shutil.copytree("template/static", "docs/static")
         except:
             print("Error copying static files.")
     
@@ -49,7 +49,7 @@ class SiteGenerator(object):
         """Create the main landing webpage."""
         print("Creating page to static file.")
         template = self.env.get_template("_main_layout.html")
-        with open("public/index.html", "w+", encoding="utf-8") as file:
+        with open("docs/index.html", "w+", encoding="utf-8") as file:
             html = template.render(title="MartaSien", projects=self.projects)
             file.write(html)
     
@@ -60,7 +60,7 @@ class SiteGenerator(object):
         folder_path = Path(f"{_PROJECTS_DIR}/md")
         for file_path in folder_path.iterdir():
             description = markdown.markdown(file_path.read_text(encoding="utf-8"))
-            webpage_name = "public/" + file_path.stem + ".html"
+            webpage_name = "docs/" + file_path.stem + ".html"
             print(f"Creating page: {webpage_name}.")
             with open(webpage_name, "w+", encoding="utf-8") as file:
                 html = template.render(project_description=description, projects=self.projects)
