@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        {% block head %}
+        <meta charset="utf-8"/>
+        <meta name="description" content="Portfolio of Marta Sienkiewicz"/>
+        <title>MartaSien</title>
+        <link rel="shortcut icon" href="static/favicon.ico">
+        <!-- Font Awesome CSS -->
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="static/css/style.css">
+        {% endblock head %}
+    </head>
+
+    <body style="font-family: sans-serif;">
+        <div id="site-body" class="container-fluid">
+            <div class="row flex-nowrap">
+                <div class="col-auto px-0">
+                    <div class="sidenav">
+                        <ul class="list-group list-group-flush">
+                            <a href="index.html" class="list-group-item list-green list-group-item-action"><i class="fa fa-home" aria-hidden="true"></i> HOME</a>
+                        </ul>
+                        <hr>
+                        <ul class="list-group list-group-flush list-green">
+                            <div class="list-group-item list-green border-0">CONTACT ME</div>
+                            <a href="mailto:msienkiewicz7@gmail.com" class="list-group-item list-green list-group-item-action"><i class="fa fa-envelope" aria-hidden="true"></i> e-mail</a>
+                            <a href="https://www.github.com/martasien" class="list-group-item list-green list-group-item-action"><i class="fa-brands fa-github-alt" aria-hidden="true"></i></i> GitHub</a>
+                            <a href="https://www.linkedin.com/in/marta-sienkiewicz-33898a120/" class="list-group-item list-green list-group-item-action"><i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn</a>
+                        </ul>
+                    </div>
+                </div>
+                <main class="col ps-md-2 pt-2">
+                    <div class="container">
+                        {% block container %}{% endblock container %}
+                    </div>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>

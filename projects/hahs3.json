@@ -1,0 +1,22 @@
+{
+    "Title": "Home&nbsp;Assistant&nbsp;HS3&nbsp;Plan",
+    "Priority": 3,
+    "Categories": ["Python", "3d-modelling", "home-automation"],
+    "Summary": "Static website for plan of Hackerspace Trójmiasto with data from its Home Assistant.",
+    "Cover": "hahs3.jpg",
+    "Website": "https://martasien.github.io/home-assistant-hs3-plan/",
+    "Tags": [
+        {
+            "Name": "GitHub Actions",
+            "Link": ""
+        },
+        {
+            "Name": "Web Development",
+            "Link": ""
+        },
+        {
+            "Name": "Python",
+            "Link": ""
+        }
+    ]
+}

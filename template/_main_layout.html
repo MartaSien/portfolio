@@ -1,0 +1,108 @@
+{% extends "_base_template.html" %}
+{% block container %}
+<h3 id="ABOUT">ABOUT</h3>
+I'm a software engineer at Hapag-Lloyd, experienced in:
+<ul>
+    <li>
+    CI/CD process, including releases of complex firmware projects, adhering to security and legal requirements,
+    </li>
+    <li>
+    development of web applications in Python,
+    </li>
+    <li>
+    embedded firmware development in C.
+    </li>
+</ul>
+In my spare time, I enjoy digital design, laser cutting, 3D modelling and printing.
+<h3 id="EXPERTISE">EXPERIENCE</h3>
+<div class="col">
+    <div class="col-sm">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Software Engineer at Sii Poland<span class="badge badge-date">04.2022 - 01.2025</span></h5>
+                <p class="card-text">
+                    <ul>
+                        <li>
+                        migration of Flask web application to a cloud solution and development in accordance to internal security regulations
+                        </li>
+                        <li>
+                        development of internal web applications that, by utilizing REST API, support firmware development and CI/CD process
+                        </li>
+                        <li>
+                        analysis of 3rd party components,regarding vulnerabilities and legal compliance, triage of detected CVEs
+                        </li>
+                        <li>
+                        technical leader backup role, team and tasks organization in scrum framework
+                        </li>
+                        <li>
+                        development of GitHub Workflows that support a review process
+                        </li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Project Manager's assistant at Modutechnic<span class="badge badge-date">05.2018 - 04.2022</span></h5>
+                <p class="card-text">
+                    <ul>
+                        <li>
+                        company's website administration and development,including UX/UI design
+                        </li>
+                        <li>
+                        supervising the implementation of an internal database, preparing data models
+                        </li>
+                        <li>
+                        coordination of an investment process, including facilitating communication between construction workers, designers and suppliers
+                        </li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<h3 id="PROJECTS">PERSONAL PROJECTS</h3>
+{% for project in projects %}
+<project class="
+    {% for category in project.Categories %}
+        {{ category }}
+    {% endfor %}
+">
+<div id="{{ project.Filename }}" class="card card-project">
+    <img src="static/{{ project.Cover }}" alt="Project Cover" max-width="100%" height="auto" class="card-img-top" />
+    <div class="card-body">
+        <h5 class="card-title">{{ project.Title }}</h5>
+        <h6 class="card-subtitle mb-2">
+            {% for tag in project.Tags %}
+                {% if tag.Link %}
+                    <a href="{{ tag.Link }}" class="badge">{{ tag.Name }}</a>
+                {% else %}
+                    <span class="badge">{{ tag.Name }}</span>
+                {% endif %}
+            {% endfor %}
+            {% for badge in project.Badges %}
+            <a href="{{ badge.Link }}">
+                <span class="badge bg-dark position-relative">
+                    {{ badge.Name }}
+                    <span class="position-absolute top-0 start-100 translate-middle badge">
+                        passing
+                    </span>
+                </span>
+            </a>
+            {% endfor %}
+        </h6>
+        <p class="card-text">
+            {{ project.Summary }}
+        </p>
+        <a href="{{ project.Filename }}.html" class="btn btn-outline-green">Details</a>
+        {%- if project.Website -%}
+        <a href="{{ project.Website }}" class="btn btn-outline-green">See me online</a>
+        {%- endif -%}
+        <br>
+    </div>
+</div>
+</project>
+{% endfor %}
+{% endblock container %}

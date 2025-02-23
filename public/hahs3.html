@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        
+        <meta charset="utf-8"/>
+        <meta name="keywords" content="sps,embedded,python,bash,github"/>
+        <meta name="description" content="Portfolio of Marta Sienkiewicz"/>
+        <title>MartaSien</title>
+        <link rel="shortcut icon" href="static/favicon.ico">
+        <!-- Font Awesome CSS -->
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="static/css/style.css">
+        
+    </head>
+
+    <body style="font-family: sans-serif;">
+        <div id="site-body" class="container-fluid">
+            <div class="row flex-nowrap">
+                <div class="col-auto px-0">
+                    <div class="sidenav">
+                        <ul class="list-group list-group-flush">
+                            <a href="index.html" class="list-group-item list-green list-group-item-action"><i class="fa fa-home" aria-hidden="true"></i> HOME</a>
+                        </ul>
+                        <hr>
+                        <ul class="list-group list-group-flush list-green">
+                            <div class="list-group-item list-green border-0">CONTACT ME</div>
+                            <a href="mailto:msienkiewicz7@gmail.com" class="list-group-item list-green list-group-item-action"><i class="fa fa-envelope" aria-hidden="true"></i> e-mail</a>
+                            <a href="https://www.github.com/martasien" class="list-group-item list-green list-group-item-action"><i class="fa-brands fa-github-alt" aria-hidden="true"></i></i> GitHub</a>
+                            <a href="https://www.linkedin.com/in/marta-sienkiewicz-33898a120/" class="list-group-item list-green list-group-item-action"><i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn</a>
+                        </ul>
+                    </div>
+                </div>
+                <main class="col ps-md-2 pt-2">
+                    <div class="container">
+                        
+    <div id="subpage-hahs3"></div>
+<h2>Home Assistant HS3 Plan</h2>
+<h3>Introduction</h3>
+<p><a href="https://hs3.pl/">Hackerspace Trójmiasto</a> (abbrv. HS3) is a community focused on technology, as well as a physical space located in Gdańsk, Poland. It is open to anyone. The space has its Home Assistant solution, alongside many iot devices. This project aims to plot the current data from these devices and show them on the Hackerspace's plan.</p>
+<p>You can see the live website here: <a href="https://martasien.github.io/home-assistant-hs3-plan/">martasien.github.io/home-assistant-hs3-plan</a></p>
+<h3>What does the website show?</h3>
+<ul class="list-group list-group-horizontal-md">
+    <li class="list-group-item list-group-item-action d-flex justify-content-between">
+        <div class="ms-2-me-auto">
+        <div class="fw-bold">Current temperature in Hackerspace</div>
+        Data gathered from hackerspace's thermostats. 
+        </div>
+        <i class="fa fa-thermometer-half" aria-hidden="true"></i>
+    </li>
+    <li class="list-group-item list-group-item-action d-flex justify-content-between">
+        <div class="ms-2-me-auto">
+        <div class="fw-bold">Number of people in Hackerspace</div>
+        Data gathered from <a href="https://github.com/hs3city/voncount">voncount</a> people counter, another interesting project from HS3.
+        </div>
+        <i class="fa fa-users" aria-hidden="true"></i>
+    </li>
+</ul>
+
+<h3>How does it work?</h3>
+<p>The website is generated using a script prepared in Python. It utilizes <a href="https://developers.home-assistant.io/docs/api/rest/">Home Assistant's RESTful API</a>, as well as <a href="https://docs.python-requests.org/en/latest/index.html">requests</a> Python library, to send requests and receive the current state of chosen IoT devices. </p>
+<p>Although the website is static, using mainly pure HTML &amp; CSS, the choice of devices, as well as their placement on the plan can be easily customized using the Python based website generator. </p>
+<p>All information generated in Python script is placed on the images by XY coordinates:</p>
+<p><code>
+entities = [
+    ["bottom:270px;left:330px", "sensor.termostat_warsztatowy_cnc_air_temperature_2"],
+    ["bottom:270px;left:600px", "sensor.termostat_cowork_air_temperature"],
+    ["bottom:290px;left:1110px", "sensor.people_in_hackerspace"],
+]
+</code></p>
+<p>The website is updated every 15 minutes using a custom GitHub Action, that sends the request and commits it to the separate branch. This way, the history of the main development branch remains intact.</p>
+<p>I've rendered 2 images that represent HS3 with the lights off, when it's closed, and on, when it's open to visitors.</p>
+<p><img class="img-fluid" src="static/hs3-on-off.png" alt="HS3 plan with lights on and off"/></p>
+<p>All images are based on my 3D model, which is <a href="https://martasien.github.io/home-assistant-hs3-plan/model.html">embedded on the website as well</a>.</p>
+<p>If you'd like to see my solution in detail or make your own Home Assistant representation, you can check out my public repository: <a href="https://github.com/MartaSien/home-assistant-hs3-plan">home-assistant-hs3-plan</a>. I'm always happy to help with a project, so If you'd like to contact me about this solution, how I made the 3D model etc. feel free to drop me a line! 😊</p>
+<h3>Closing words</h3>
+<p>Ever since I saw the HS3's Home Assistant, I thought that making a plan with plotted IoT devices would be very useful for other members. The Home Assistant dashboard offers an option to create and customize a plan like this. However, I've wanted to prepare a read-only solution available to every hackerspace's member, not only to Home Assistant administrators.</p>
+<p>That's how the idea of using a periodically updated static website came to life. In comparison to a dynamic website, I can easily host this solution on GitHub. It is also faster and requires less resources. A perfect solution for a non-profit, where every subscription fee can be a significant burden.</p>
+<p>One of the biggest challenges when creating a website was to prepare the space's plan in a responsive way. The image is rasterized, it has a set resolution. However, some of the information is placed using XY coordinates in CSS &amp; HTML. With such a wide variety of potential screen aspect rations, I've still to find an ideal solution to combine these website elements without differences in placement. If you have an idea for a better implementation I'd be very grateful for tips. 💡</p>
+<h3>Attributions and thank you 💚</h3>
+<p>I'm thankful to <a href="https://github.com/DoomHammer">DoomHammer</a>, the HS3's member who introduced me to Home Assistant and guided me on its usage.</p>
+
+                    </div>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>
