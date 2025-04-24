@@ -62,7 +62,7 @@ h3 {
     background-image: url('../ms-background.png');
     background-size: cover;
     width: 250px;
-    min-height: 750px;
+    min-height: 100vh;
     position: sticky;
     z-index: 1;
     top: 0;
